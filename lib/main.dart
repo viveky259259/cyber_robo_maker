@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:retro_saving_world/robot_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -40,10 +41,22 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Lottie.asset(
-          'assets/lottieRobo.json',
-        ),
+      body: Column(
+        children: [
+          Container(
+            child: Lottie.asset(
+              'assets/lottieRobo.json',
+            ),
+          ),
+          RaisedButton(
+              child: Text("Make your own robot!"),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => RobotScreen()),
+                );
+              })
+        ],
       ),
     );
   }
