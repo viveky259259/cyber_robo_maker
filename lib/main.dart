@@ -7,6 +7,7 @@ import 'package:retro_saving_world/splash/screen.dart';
 import 'bloc/login/bloc.dart';
 import 'bloc/overlays/bloc.dart';
 import 'common/themes.dart';
+import 'package:lottie/lottie.dart';
 
 void main() {
   runApp(MyApp());
