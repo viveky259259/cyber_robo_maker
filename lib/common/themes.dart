@@ -38,7 +38,7 @@ class ThemeSelection {
       canvasColor: Color(0xffE09E45),
       accentColor: Color(0xff226b80),
       accentColorBrightness: Brightness.light,
-      scaffoldBackgroundColor: Color(0xffffebd3),
+      scaffoldBackgroundColor: Colors.white24,
 //    bottomAppBarColor: Color(0xff6D42CE),
       cardColor: Color(0xaaffeaa5),
       dividerColor: Color(0xff40a798),

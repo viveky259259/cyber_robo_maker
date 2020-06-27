@@ -7,9 +7,9 @@ import 'package:retro_saving_world/splash/screen.dart';
 import 'bloc/login/bloc.dart';
 import 'bloc/overlays/bloc.dart';
 import 'common/themes.dart';
-import 'package:lottie/lottie.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Retro',
-        theme: ThemeSelection.getLightTheme(ThemeSelection.OutRunner),
+        theme: ThemeSelection.getLightTheme(ThemeSelection.NeonCity),
         home: SplashScreen(),
         navigatorKey: Get.key,
         builder: (context, child) {
