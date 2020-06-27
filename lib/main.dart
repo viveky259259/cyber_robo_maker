@@ -1,49 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:responsive_framework/responsive_wrapper.dart';
+import 'package:retro_saving_world/splash/screen.dart';
+
+import 'bloc/login/bloc.dart';
+import 'bloc/overlays/bloc.dart';
+import 'common/themes.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(title: 'Flutter Lottie Animation'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Lottie.asset(
-          'assets/lottieRobo.json',
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<LoginBloc>(
+          create: (context) => LoginBloc(),
         ),
+        BlocProvider<OverLayBloc>(
+          create: (context) => OverLayBloc(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Retro',
+        theme: ThemeSelection.getLightTheme(ThemeSelection.NeonCity),
+        home: SplashScreen(),
+        navigatorKey: Get.key,
+        builder: (context, child) {
+          return ResponsiveWrapper(
+              shrinkWrap: true,
+              maxWidth: 500,
+              mediaQueryData: MediaQuery.of(context),
+              minWidth: 400,
+              breakpoints: [],
+              child: child);
+        },
       ),
     );
   }

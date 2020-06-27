@@ -10,3 +10,8 @@ A hackathon Project
 
 ##Designs
 1. https://in.pinterest.com/pin/705657835348563279/
+
+
+##Animations
+1. https://elements.envato.com/cyber-car-QSBKR73
+2. https://elements.envato.com/79-futuristic-technology-icons-orchid-series-GE5TSMW
