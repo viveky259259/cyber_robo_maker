@@ -45,6 +45,8 @@ dependencies:
   percent_indicator: ^2.1.5
   video_player:
   chewie:
+  audioplayers: ^0.15.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -62,9 +64,12 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - asset/lottie/
-    - asset/video/
-    - asset/
+    - assets/lottie/
+    - assets/video/
+    - assets/
+    - assets/vct/
+    - assets/cyberpunk.mp3
+    - assets/partfix.mp3
     # - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -81,28 +86,28 @@ flutter:
   fonts:
     - family: Routhers
       fonts:
-        - asset: asset/font/RouthersRegular.otf
-        - asset: asset/font/RouthersExtrude.otf
+        - asset: assets/font/RouthersRegular.otf
+        - asset: assets/font/RouthersExtrude.otf
     - family: ArcadeMachine
       fonts:
-        - asset: asset/font/AXRArcadeMachine.otf
-        - asset: asset/font/AXRArcadeMachine.ttf
+        - asset: assets/font/AXRArcadeMachine.otf
+        - asset: assets/font/AXRArcadeMachine.ttf
     - family: OutRunner
       fonts:
-        - asset: asset/font/AXROutrunner.otf
-        - asset: asset/font/AXROutrunner.ttf
+        - asset: assets/font/AXROutrunner.otf
+        - asset: assets/font/AXROutrunner.ttf
     - family: RetroFunk
       fonts:
-        - asset: asset/font/RetrofunkSerif.otf
-        - asset: asset/font/RetrofunkScriptPro.otf
-        - asset: asset/font/RetrofunkScriptExtrude.otf
+        - asset: assets/font/RetrofunkSerif.otf
+        - asset: assets/font/RetrofunkScriptPro.otf
+        - asset: assets/font/RetrofunkScriptExtrude.otf
     - family: Neon
       fonts:
-        - asset: asset/font/neon.ttf
+        - asset: assets/font/neon.ttf
     - family: NeonCity
       fonts:
-        - asset: asset/font/neoncity.otf
-        - asset: asset/font/neonlights.ttf
+        - asset: assets/font/neoncity.otf
+        - asset: assets/font/neonlights.ttf
 
 
 

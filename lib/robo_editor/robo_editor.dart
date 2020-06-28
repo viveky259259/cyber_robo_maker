@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:retro_saving_world/robomaker/robot_maker_screen.dart';
 
 class RoboEditorScreen extends StatefulWidget {
   @override
@@ -12,9 +13,7 @@ class _RoboEditorScreenState extends State<RoboEditorScreen> {
     return Stack(
       fit: StackFit.expand,
       children: <Widget>[
-        Card(
-          color: Colors.yellow.shade200,
-        ),
+        RobotMaker(),
         Align(
           alignment: Alignment.topLeft,
           child: Padding(

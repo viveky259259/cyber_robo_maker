@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:retro_saving_world/common/text_styles.dart';
+import 'package:retro_saving_world/robomaker/robo_stats_screen.dart';
 import 'package:retro_saving_world/common/themes.dart';
 import 'package:retro_saving_world/robo_editor/robo_editor.dart';
-import 'package:retro_saving_world/robo_editor/robo_output.dart';
 
 class DashBoardScreen extends StatefulWidget {
   @override
@@ -27,11 +27,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Make your Robot',
-            style: CustomTextStyle.strokeStyle(color: Colors.white)),
-      ),
       body: SafeArea(
         child: isInitializing
             ? Center(
@@ -65,7 +60,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     side: BorderSide(color: ThemeSelection.neonNew)),
                 padding: EdgeInsets.all(16),
                 onPressed: () {
-                  Get.to(RoboOutPutScreen());
+                  Get.to(RoboStats());
                 },
                 child: Text(
                   'Generate',

@@ -25,7 +25,8 @@ class AppSliderScreen extends StatelessWidget {
       ),
       body: Container(
         decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage("asset/bgimage.png",),fit: BoxFit.cover)),
+            image: DecorationImage(
+                image: AssetImage("assets/vct/bg.png"), fit: BoxFit.cover)),
         child: Column(
           children: <Widget>[
             Expanded(
