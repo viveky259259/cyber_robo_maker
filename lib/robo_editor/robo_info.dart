@@ -39,7 +39,7 @@ class _RobotInfoState extends State<RobotInfo> {
                         style: TextStyle(color: Colors.white),
                       ),
                       Text(
-                        "Chester",
+                        "Jarvish Hack",
                         style: TextStyle(color: Colors.white),
                       )
                     ],

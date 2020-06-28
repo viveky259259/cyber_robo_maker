@@ -17,30 +17,42 @@ class RoboEditorScreen extends StatefulWidget {
 }
 
 class _RoboEditorScreenState extends State<RoboEditorScreen> {
+  ValueNotifier<int> progress;
+
+  @override
+  void initState() {
+    super.initState();
+    progress = ValueNotifier(0);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       fit: StackFit.expand,
       children: <Widget>[
-        Retro(widget.controller),
+        Retro(widget.controller, progress),
         Align(
           alignment: Alignment.topLeft,
           child: Padding(
-            padding: EdgeInsets.only(left: 16),
-            child: CircularPercentIndicator(
-              radius: 64.0,
-              lineWidth: 5.0,
-              percent: 0.5,
-              center: Text("50%"),
-              circularStrokeCap: CircularStrokeCap.square,
-              backgroundColor: Color(0xff1261d1),
-              maskFilter: MaskFilter.blur(BlurStyle.solid, 2),
-              linearGradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Color(0xffc4ffff), Color(0xff08ddea)],
-              ),
-            ),
+            padding: const EdgeInsets.only(left: 16, top: 84),
+            child: ValueListenableBuilder<int>(
+                valueListenable: progress,
+                builder: (context, value, child) {
+                  return CircularPercentIndicator(
+                    radius: 64.0,
+                    lineWidth: 5.0,
+                    percent: value * 0.01,
+                    center: Text('$value'),
+                    circularStrokeCap: CircularStrokeCap.square,
+                    backgroundColor: Color(0xff1261d1),
+                    maskFilter: MaskFilter.blur(BlurStyle.solid, 2),
+                    linearGradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [Color(0xffc4ffff), Color(0xff08ddea)],
+                    ),
+                  );
+                }),
           ),
         )
       ],
@@ -50,8 +62,9 @@ class _RoboEditorScreenState extends State<RoboEditorScreen> {
 
 class Retro extends StatefulWidget {
   final ScreenshotController controller;
+  final ValueNotifier<int> progress;
 
-  Retro(this.controller);
+  Retro(this.controller, this.progress);
 
   @override
   _RetroState createState() => _RetroState();
@@ -77,7 +90,7 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
   bool acceptRightHand = false;
   bool acceptLeftHand = false;
 
-  int allPartsCreates = 0;
+  List<String> allPartsCreates = [];
 
   double _headPlaceHolderVisible = 0;
   double _legPlaceHolderVisible = 0;
@@ -93,6 +106,11 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
   String _currentHeadImagePlaceHolder = "assets/vct/head.png";
 
   String torso = "assets/vct/body.png";
+
+  String top = "top";
+  String bottom = "bottom";
+  String left = "left";
+  String right = "right";
 
   AudioCache audioCache = new AudioCache();
   AudioPlayer advancedPlayer = new AudioPlayer();
@@ -374,7 +392,10 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
             this.setState(() {
               acceptHead = true;
               _currentHeadImagePlaceHolder = data;
-              allPartsCreates++;
+              if(!allPartsCreates.contains(top)){
+                allPartsCreates.add(top);
+              }
+
             });
             return true;
           } else {
@@ -416,7 +437,9 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
           if (data == "assets/vct/leftHand.png") {
             this.setState(() {
               acceptLeftHand = true;
-              allPartsCreates++;
+              if(!allPartsCreates.contains(left)){
+                allPartsCreates.add(left);
+              }
             });
             return true;
           } else {
@@ -458,7 +481,9 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
           if (data == "assets/vct/right.png") {
             this.setState(() {
               acceptRightHand = true;
-              allPartsCreates++;
+              if(!allPartsCreates.contains(right)){
+                allPartsCreates.add(right);
+              }
             });
             return true;
           } else {
@@ -502,7 +527,9 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
           if (data == "assets/vct/bottom.png") {
             this.setState(() {
               acceptLegs = true;
-              allPartsCreates++;
+              if(!allPartsCreates.contains(bottom)){
+                allPartsCreates.add(bottom);
+              }
             });
             return true;
           } else {
@@ -549,7 +576,11 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     statusBarHeight = MediaQuery.of(context).padding.top;
-    if (allPartsCreates >= 4) {
+    Future.delayed(Duration(milliseconds: 374)).then((value){
+      widget.progress.value = allPartsCreates.length * 25;
+      widget.progress.notifyListeners();
+    });
+    if (allPartsCreates.length >= 4) {
       audioCachePartc.play("clap.mp3");
     }
     return Scaffold(
@@ -613,7 +644,7 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
             ),
           ),
           Positioned(top: 20.0, right: 10, child: _stopSong()),
-          allPartsCreates >= 4
+          allPartsCreates.length >= 4
               ? Lottie.asset("assets/vct/18364-celebaration.json")
               : SizedBox()
         ],
