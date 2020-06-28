@@ -3,7 +3,7 @@ import 'package:retro_saving_world/common/themes.dart';
 
 class CustomTextStyle {
   static TextStyle strokeStyle(
-          {color: ThemeSelection.neonNew, fontSize: 20.0}) =>
+          {color: ThemeSelection.blueNeon, fontSize: 20.0}) =>
       TextStyle(
         letterSpacing: 5,
         fontSize: fontSize,
@@ -14,27 +14,27 @@ class CustomTextStyle {
 //    fontFamily: "NeonLights",
       );
 
-  static TextStyle glowStyle({color: Colors.white}) => TextStyle(
+  static TextStyle glowStyle({color: Colors.white,fontSize:20.0}) => TextStyle(
       letterSpacing: 5,
-      fontSize: 50,
+      fontSize: fontSize,
       shadows: [
         BoxShadow(
-          color: ThemeSelection.neonNew,
+          color: ThemeSelection.blueNeon,
           blurRadius: 20.0,
           spreadRadius: 20.0,
         ),
         BoxShadow(
-          color: ThemeSelection.neonNew,
+          color: ThemeSelection.blueNeon,
           blurRadius: 30.0,
           spreadRadius: 30.0,
         ),
         BoxShadow(
-          color: ThemeSelection.neonNew,
+          color: ThemeSelection.blueNeon,
           blurRadius: 30.0,
           spreadRadius: 2.0,
         ),
         BoxShadow(
-          color: ThemeSelection.neonNew,
+          color: ThemeSelection.blueNeon,
           blurRadius: 200.0,
           spreadRadius: 200.0,
         ),

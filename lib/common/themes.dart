@@ -12,7 +12,12 @@ class ThemeSelection {
   static const Color neonPurple = Color(0xFFbc13fe);
   static const Color neonDarkBlue = Color(0xFF7d12ff);
   static const Color neonNew = Color(0xFFbc13fe);
-
+  static const Color blueNeon = Color(0xffc4ffff);
+  static const Color blueNeonDark = Color(0xff08ddea);
+  static const Color ascentColor = Color(0xfffd8090);
+  static const Color borderColor = Color.fromRGBO(181, 86, 147, 1);
+  static const bgColor = Color.fromRGBO(254, 251, 222, 1);
+  static const bgColor2 = Color.fromRGBO(8, 8,109, 1);
   static ThemeData getLightTheme(String selectedFont) => ThemeData(
       brightness: Brightness.light,
       visualDensity: VisualDensity(vertical: 0.5, horizontal: 0.5),
@@ -38,7 +43,7 @@ class ThemeSelection {
       canvasColor: Color(0xffE09E45),
       accentColor: Color(0xff226b80),
       accentColorBrightness: Brightness.light,
-      scaffoldBackgroundColor: Colors.white24,
+      scaffoldBackgroundColor: bgColor2,
 //    bottomAppBarColor: Color(0xff6D42CE),
       cardColor: Color(0xaaffeaa5),
       dividerColor: Color(0xff40a798),
@@ -119,9 +124,9 @@ class ThemeSelection {
 //    pageTransitionsTheme: PageTransitionsTheme(
 //      //page transition theme
 //    ),
-//    appBarTheme: AppBarTheme(
-//      //app bar theme
-//    ),
+      appBarTheme: AppBarTheme(
+          //app bar theme
+          color: ascentColor),
 //    bottomAppBarTheme: BottomAppBarTheme(
 //      // bottom app bar theme
 //    ),
