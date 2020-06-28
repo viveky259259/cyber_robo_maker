@@ -6,7 +6,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gallery_saver/gallery_saver.dart';
-import 'package:path_provider/path_provider.dart' as path;
 import 'package:retro_saving_world/common/text_styles.dart';
 import 'package:retro_saving_world/common/themes.dart';
 import 'package:retro_saving_world/robo_editor/robo_editor.dart';
@@ -125,10 +124,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 //                    Get.to(RoboStats());
 //                  createImageFromWidget(roboEditor);
                   image = await screenshotController.capture();
-                  final directory =
-                      await path.getApplicationDocumentsDirectory();
 
                   GallerySaver.saveImage(image.path);
+                  //TODO:: Pass image preview / card screen  || Abhishek and Praful
                   showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
@@ -157,7 +155,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                   ),
                                 ),
                                 Image.file(image),
-
                               ],
                             ),
                           ));
