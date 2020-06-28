@@ -63,7 +63,7 @@ class AppSliderScreen extends StatelessWidget {
                   side: BorderSide(color: ThemeSelection.neonNew)),
               padding: EdgeInsets.all(32),
               onPressed: () {
-                Get.off(DashBoardScreen());
+                Get.to(DashBoardScreen());
               },
               child: Text(
                 'Make your own Robo',
