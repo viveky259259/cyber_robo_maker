@@ -27,31 +27,25 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Make your Robot',
-            style: CustomTextStyle.strokeStyle(color: Colors.white)),
-      ),
-      body: SafeArea(
-        child: isInitializing
-            ? Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Text('Please wait', style: CustomTextStyle.glowStyle()),
-                    SizedBox(
-                      height: 32,
-                    ),
-                    Text('Initializing..',
-                        style: CustomTextStyle.strokeStyle()),
-                  ],
-                ),
-              )
-            : SizedBox(
-                height: double.infinity,
-                width: double.infinity,
-                child: RoboEditorScreen()),
-      ),
+
+      body: isInitializing
+          ? Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text('Please wait', style: CustomTextStyle.glowStyle()),
+                  SizedBox(
+                    height: 32,
+                  ),
+                  Text('Initializing..',
+                      style: CustomTextStyle.strokeStyle()),
+                ],
+              ),
+            )
+          : SizedBox(
+              height: double.infinity,
+              width: double.infinity,
+              child: RoboEditorScreen()),
       bottomNavigationBar: isInitializing
           ? null
           : Padding(
