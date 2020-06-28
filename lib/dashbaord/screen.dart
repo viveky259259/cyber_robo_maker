@@ -46,26 +46,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               height: double.infinity,
               width: double.infinity,
               child: RoboEditorScreen()),
-      body: SafeArea(
-        child: isInitializing
-            ? Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Text('Please wait', style: CustomTextStyle.glowStyle()),
-                    SizedBox(
-                      height: 32,
-                    ),
-                    Text('Initializing..',
-                        style: CustomTextStyle.strokeStyle()),
-                  ],
-                ),
-              )
-            : SizedBox(
-                height: double.infinity,
-                width: double.infinity,
-                child: RoboEditorScreen()),
-      ),
       bottomNavigationBar: isInitializing
           ? null
           : Padding(

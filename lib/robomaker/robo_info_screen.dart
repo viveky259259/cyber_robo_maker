@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'file:///F:/retro_saving_world/lib/common/widgets/neon_progressbar.dart';
 import 'package:retro_saving_world/common/text_styles.dart';
+import 'package:retro_saving_world/common/widgets/neon_progressbar.dart';
 
 class RobotInfo extends StatefulWidget {
   @override
