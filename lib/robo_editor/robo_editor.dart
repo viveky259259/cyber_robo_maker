@@ -582,7 +582,7 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
                 Positioned(
                     right: 0,
                     bottom: 0,
-                    left: MediaQuery.of(context).size.height / 3.65,
+                    left: MediaQuery.of(context).size.height / 3.45,
                     top: -MediaQuery.of(context).size.width / 7,
                     child: _createLefttHand()),
                 Positioned(
