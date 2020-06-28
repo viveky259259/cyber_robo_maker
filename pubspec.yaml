@@ -30,7 +30,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
   responsive_framework: ^0.0.7
-  cached_network_image: ^2.2.0+1
+  cached_network_image:
   http: 0.12.0+4
   bloc: ^4.0.0
   flutter_bloc: ^4.0.1
@@ -45,6 +45,8 @@ dependencies:
   percent_indicator: ^2.1.5
   video_player:
   chewie:
+  audioplayers: ^0.7.8
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
