@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     _controller = VideoPlayerController.asset(
-      'asset/video/bgvideo.mp4',
+      'assets/video/bgvideo.mp4',
     )
       ..setLooping(true)
       ..play();
@@ -56,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
               )),
           Column(
             children: <Widget>[
-              Lottie.asset('asset/lottie/lottieRobo.json',
+              Lottie.asset('assets/lottie/lottieRobo.json',
                   animate: true,
                   width: double.infinity,
                   height: MediaQuery.of(context).size.height * 0.7),
