@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Retro',
-        theme: ThemeSelection.getLightTheme(ThemeSelection.NeonCity),
+        theme: ThemeSelection.getLightTheme(ThemeSelection.BigSpace),
         home: SplashScreen(),
         debugShowCheckedModeBanner: false,
         navigatorKey: Get.key,
