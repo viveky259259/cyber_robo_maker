@@ -23,51 +23,57 @@ class AppSliderScreen extends StatelessWidget {
           style: CustomTextStyle.glowStyle(),
         ),
       ),
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: Swiper(
-              itemCount: 4,
-              autoplay: false,
-              loop: false,
-              curve: Curves.bounceIn,
-              itemBuilder: (BuildContext context, int i) {
-                return Container(
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
+      body: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(image: AssetImage("asset/bgimage.png",),fit: BoxFit.cover)),
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: Swiper(
+                itemCount: 4,
+                autoplay: false,
+                loop: false,
+                curve: Curves.bounceIn,
+                itemBuilder: (BuildContext context, int i) {
+                  return Container(
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
 //                      borderRadius: BorderRadius.all(Radius.circular(32)),
-                      image: DecorationImage(
-                          image: CachedNetworkImageProvider(
-                        images[i],
+                        image: DecorationImage(
+                            image: CachedNetworkImageProvider(
+                          images[i],
 
 //                              fit: BoxFit.fill,
-                      ))),
-                );
-              },
-              pagination: new SwiperPagination(),
-              control: new SwiperControl(
-                disableColor: Colors.grey,
-                color: Colors.green,
+                        ))),
+                  );
+                },
+                pagination: new SwiperPagination(),
+                control: new SwiperControl(
+                  disableColor: Colors.grey,
+                  color: Colors.green,
+                ),
+                scrollDirection: Axis.horizontal,
               ),
-              scrollDirection: Axis.horizontal,
             ),
-          ),
-          OutlineButton(
-            borderSide:
-                BorderSide(color: ThemeSelection.neonDarkBlue, width: 5),
-            shape: RoundedRectangleBorder(
-                side: BorderSide(color: ThemeSelection.neonNew)),
-            padding: EdgeInsets.all(32),
-            onPressed: () {
-              Get.off(DashBoardScreen());
-            },
-            child: Text(
-              'Make your own Robo',
-              style: CustomTextStyle.strokeStyle(),
+            OutlineButton(
+              borderSide:
+                  BorderSide(color: ThemeSelection.borderColor, width: 5),
+              shape: RoundedRectangleBorder(
+                  side: BorderSide(color: ThemeSelection.neonNew)),
+              padding: EdgeInsets.all(32),
+              onPressed: () {
+                Get.off(DashBoardScreen());
+              },
+              child: Text(
+                'Make your own Robo',
+                style: CustomTextStyle.strokeStyle(),
+              ),
             ),
-          ),
-          SizedBox(height: 24,)
-        ],
+            SizedBox(
+              height: 24,
+            )
+          ],
+        ),
       ),
     );
   }
