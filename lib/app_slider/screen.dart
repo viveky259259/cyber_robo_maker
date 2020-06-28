@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:retro_saving_world/common/text_styles.dart';
 import 'package:retro_saving_world/common/themes.dart';
+import 'package:retro_saving_world/common/widgets/custom_icon.dart';
 import 'package:retro_saving_world/dashbaord/screen.dart';
 
 class AppSliderScreen extends StatelessWidget {
@@ -65,9 +67,19 @@ class AppSliderScreen extends StatelessWidget {
               onPressed: () {
                 Get.off(DashBoardScreen());
               },
-              child: Text(
-                'Make your own Robo',
-                style: CustomTextStyle.strokeStyle(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomIcon(FontAwesomeIcons.robot,
+                      size: 24, color: Colors.blue[200]),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                      'Make your own Robo',
+                      style: CustomTextStyle.strokeStyle(),
+                  ),
+                ],
               ),
             ),
             SizedBox(
