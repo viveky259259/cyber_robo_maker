@@ -29,6 +29,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
   audioplayers: ^0.7.8
+  lottie: ^0.4.0+1
 
 dev_dependencies:
   flutter_test:
@@ -50,6 +51,7 @@ flutter:
     - assets/vct/
     - assets/cyberpunk.mp3
     - assets/partfix.mp3
+    - assets/clap.mp3
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

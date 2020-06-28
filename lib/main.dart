@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:lottie/lottie.dart';
 
 void main() {
   runApp(MyApp());
@@ -52,6 +53,8 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
   bool acceptRightHand = false;
   bool acceptLeftHand = false;
 
+  int  allPartsCreates=0;
+
   double _headPlaceHolderVisible = 0;
   double _legPlaceHolderVisible = 0;
   double _rightPlaceHolderVisible =0;
@@ -63,6 +66,7 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
   double statusBarHeight;
   double bodyTranslateX = -10.0;
 
+
   String _currentHeadImagePlaceHolder = "assets/vct/head.png";
 
   String torso = "assets/vct/body.png";
@@ -72,6 +76,9 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
 
   AudioCache audioCachePart = new AudioCache();
   AudioPlayer advancedPlayerPart = new AudioPlayer();
+
+  AudioCache audioCachePartc = new AudioCache();
+  AudioPlayer advancedPlayerPartc = new AudioPlayer();
 
   @override
   void initState() {
@@ -84,8 +91,8 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
     audioCache = new AudioCache(fixedPlayer: advancedPlayer);
     audioCache.loop("cyberpunk.mp3", volume: 0.1);
 
-    advancedPlayerPart = new AudioPlayer();
-    audioCachePart = new AudioCache(fixedPlayer: advancedPlayerPart);
+    advancedPlayerPartc = new AudioPlayer();
+    audioCachePartc = new AudioCache(fixedPlayer: advancedPlayerPartc);
   }
 
 
@@ -279,6 +286,7 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
             this.setState(() {
               acceptHead = true;
               _currentHeadImagePlaceHolder = data;
+              allPartsCreates++;
             });
             return true;
           } else {
@@ -323,6 +331,7 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
           if (data == "assets/vct/leftHand.png") {
             this.setState(() {
               acceptLeftHand = true;
+              allPartsCreates++;
             });
             return true;
           } else {
@@ -369,6 +378,8 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
           if (data == "assets/vct/right.png") {
             this.setState(() {
               acceptRightHand = true;
+              allPartsCreates++;
+              
             });
             return true;
           } else {
@@ -414,6 +425,7 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
           if (data == "assets/vct/bottom.png") {
             this.setState(() {
               acceptLegs = true;
+              allPartsCreates++;
             });
             return true;
           } else {
@@ -459,6 +471,9 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     statusBarHeight = MediaQuery.of(context).padding.top;
+    if(allPartsCreates>=4){
+       audioCachePartc.play("clap.mp3");
+    }
     return Scaffold(
         body: Container(
       height: MediaQuery.of(context).size.height,
@@ -513,6 +528,9 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
             ),
           ),
           Positioned(top: 20.0, right: 10, child: _stopSong()),
+         
+        
+          allPartsCreates>=4? Lottie.asset("assets/vct/18364-celebaration.json"):Container()
         ],
       ),
     ));
