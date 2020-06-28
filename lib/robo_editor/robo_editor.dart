@@ -5,9 +5,13 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:retro_saving_world/robomaker/robot_maker_screen.dart';
+import 'package:screenshot/screenshot.dart';
 
 class RoboEditorScreen extends StatefulWidget {
+  final ScreenshotController controller;
+
+  RoboEditorScreen(this.controller);
+
   @override
   _RoboEditorScreenState createState() => _RoboEditorScreenState();
 }
@@ -18,7 +22,7 @@ class _RoboEditorScreenState extends State<RoboEditorScreen> {
     return Stack(
       fit: StackFit.expand,
       children: <Widget>[
-        RobotMaker(),
+        Retro(widget.controller),
         Align(
           alignment: Alignment.topLeft,
           child: Padding(
@@ -45,6 +49,10 @@ class _RoboEditorScreenState extends State<RoboEditorScreen> {
 }
 
 class Retro extends StatefulWidget {
+  final ScreenshotController controller;
+
+  Retro(this.controller);
+
   @override
   _RetroState createState() => _RetroState();
 }
@@ -94,11 +102,30 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
 
   AudioCache audioCachePartc = new AudioCache();
   AudioPlayer advancedPlayerPartc = new AudioPlayer();
+  GlobalKey torsoKey;
+
+  List<OverlayEntry> overlays = [];
 
   @override
   void initState() {
     super.initState();
     initPlayer();
+    torsoKey = GlobalKey();
+    audioCache = new AudioCache();
+    advancedPlayer = new AudioPlayer();
+
+    audioCachePart = new AudioCache();
+    advancedPlayerPart = new AudioPlayer();
+
+    audioCachePartc = new AudioCache();
+    advancedPlayerPartc = new AudioPlayer();
+  }
+
+  clear() {
+    for (int i = 0; i < overlays.length; i++) {
+      overlays[i].remove();
+    }
+    overlays.clear();
   }
 
   void initPlayer() {
@@ -140,6 +167,10 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
                   color: Colors.pinkAccent,
                   child: Draggable(
                     onDragStarted: () {
+                      RenderBox renderBox =
+                          torsoKey.currentContext.findRenderObject();
+                      var size = renderBox.size;
+                      var offset = renderBox.localToGlobal(Offset.zero);
                       if (assets[i] == "assets/vct/head.png" ||
                           assets[i] == "assets/vct/straightFaceBot.png" ||
                           assets[i] ==
@@ -208,23 +239,66 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
                       }
                     },
                     onDragCompleted: () {
+                      RenderBox renderBox =
+                          torsoKey.currentContext.findRenderObject();
+                      var size = renderBox.size;
+                      var offset = renderBox.localToGlobal(Offset.zero);
+
                       audioCachePart.play("partfix.mp3", volume: 1.0);
                       if (assets[i] == "assets/vct/head.png") {
                         this.setState(() {
                           _headPlaceHolderVisible = 0.0;
                         });
+//                        var a = OverlayEntry(
+//                            builder: (context) => Positioned(
+//                                  left: offset.dx,
+//                                  top: offset.dy - 50,
+//                                  child: Image(
+//                                    height: 150,
+//                                    image: AssetImage(assets[i]),
+//                                  ),
+//                                ));
+//                        Overlay.of(context).insert(a);
+//                        overlays.add(a);
                       } else if (assets[i] == "assets/vct/bottom.png") {
                         this.setState(() {
                           _legPlaceHolderVisible = 0.0;
                         });
+//                        Overlay.of(context).insert(OverlayEntry(
+//                            builder: (context) => Positioned(
+//                                  left: offset.dx,
+//                                  top: offset.dy + 100,
+//                                  child: Image(
+//                                    height: 150,
+//                                    image: AssetImage(assets[i]),
+//                                  ),
+//                                )));
                       } else if (assets[i] == "assets/vct/right.png") {
                         this.setState(() {
                           _rightPlaceHolderVisible = 0.0;
                         });
+//                        Overlay.of(context).insert(OverlayEntry(
+//                            builder: (context) => Positioned(
+//                                  left: offset.dx,
+//                                  top: offset.dy + size.height / 2,
+//                                  child: Image(
+//                                    height: 50,
+//                                    image: AssetImage(assets[i]),
+//                                  ),
+//                                )));
                       } else if (assets[i] == "assets/vct/leftHand.png") {
                         this.setState(() {
                           _leftPlaceHolderVisible = 0.0;
                         });
+//                        Overlay.of(context).insert(OverlayEntry(
+//                            builder: (context) => Positioned(
+//                                  left: offset.dx + size.width,
+//                                  top: offset.dy + size.height / 2,
+//                                  child: Image(
+//                                    height: 50,
+//                                    image: AssetImage(assets[i]),
+//                                  ),
+//                                )));
                       }
                     },
                     data: assets[i],
@@ -447,7 +521,7 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
       filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
       child: Container(
         decoration: BoxDecoration(
-            border: Border.all(color: Colors.pinkAccent[700], width: 2.0),
+//            border: Border.all(color: Colors.pinkAccent[700], width: 2.0),
             boxShadow: [
               BoxShadow(
                 color: Colors.transparent,
@@ -463,6 +537,7 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
     return Align(
       alignment: Alignment.center,
       child: Container(
+          key: torsoKey,
           height: MediaQuery.of(context).size.height / 3,
           width: MediaQuery.of(context).size.width / 3,
           child: Image(
@@ -486,32 +561,39 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
               fit: BoxFit.cover, image: AssetImage("assets/vct/bg.jpg"))),
       child: Stack(
         children: <Widget>[
-          _backDropFileter(),
-          _createTorso(),
-          Positioned(
-              top: MediaQuery.of(context).size.height / 2.59,
-              bottom: 0,
-              right: 0,
-              left: MediaQuery.of(context).size.width / 30,
-              child: _createLegs()),
-          Positioned(
-              top: -MediaQuery.of(context).size.height / 3.5,
-              bottom: 0,
-              right: 0,
-              left: 0,
-              child: _createHead()),
-          Positioned(
-              right: 0,
-              bottom: 0,
-              left: MediaQuery.of(context).size.height / 3.65,
-              top: -MediaQuery.of(context).size.width / 7,
-              child: _createLefttHand()),
-          Positioned(
-              right: 0,
-              bottom: 0,
-              left: -MediaQuery.of(context).size.width / 10,
-              top: MediaQuery.of(context).size.height / 7,
-              child: _createRightHand()),
+          Screenshot(
+            controller: widget.controller,
+            child: Stack(
+              children: <Widget>[
+                _backDropFileter(),
+                _createTorso(),
+                Positioned(
+                    top: MediaQuery.of(context).size.height / 2.59,
+                    bottom: 0,
+                    right: 0,
+                    left: MediaQuery.of(context).size.width / 30,
+                    child: _createLegs()),
+                Positioned(
+                    top: -MediaQuery.of(context).size.height / 3.5,
+                    bottom: 0,
+                    right: 0,
+                    left: 0,
+                    child: _createHead()),
+                Positioned(
+                    right: 0,
+                    bottom: 0,
+                    left: MediaQuery.of(context).size.height / 3.65,
+                    top: -MediaQuery.of(context).size.width / 7,
+                    child: _createLefttHand()),
+                Positioned(
+                    right: 0,
+                    bottom: 0,
+                    left: -MediaQuery.of(context).size.width / 8,
+                    top: MediaQuery.of(context).size.height / 8,
+                    child: _createRightHand()),
+              ],
+            ),
+          ),
           Positioned(bottom: 1.0, left: 0.0, right: 0.0, child: _roboparts()),
           Positioned(
             top: 20.0,
@@ -533,7 +615,7 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
           Positioned(top: 20.0, right: 10, child: _stopSong()),
           allPartsCreates >= 4
               ? Lottie.asset("assets/vct/18364-celebaration.json")
-              : Container()
+              : SizedBox()
         ],
       ),
     ));
@@ -542,6 +624,11 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
   @override
   void dispose() {
     super.dispose();
-    audioCache.clear("cyberpunk.mp3");
+    audioCache.clearCache();
+    advancedPlayer.dispose();
+    audioCachePart.clearCache();
+    advancedPlayerPart.dispose();
+    audioCachePartc.clearCache();
+    advancedPlayerPartc.dispose();
   }
 }
