@@ -5,25 +5,6 @@ import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'robo_stats_screen.dart';
 
-class RobotMaker extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<RobotMaker> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Flutter Demo',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        home: Retro());
-  }
-}
-
 class Retro extends StatefulWidget {
   @override
   _RetroState createState() => _RetroState();
