@@ -42,20 +42,28 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
     "assets/vct/bottom.png",
     "assets/vct/body1.png",
     "assets/vct/straightFaceBot.png",
-    "assets/vct/straightFaceBotWithAntena.png"
+    "assets/vct/straightFaceBotWithAntena.png",
+    "assets/vct/right.png",
+    "assets/vct/leftHand.png"
   ];
 
   bool acceptHead = false;
   bool acceptLegs = false;
+  bool acceptRightHand = false;
+  bool acceptLeftHand = false;
 
   double _headPlaceHolderVisible = 0;
   double _legPlaceHolderVisible = 0;
+  double _rightPlaceHolderVisible =0;
+  double _leftPlaceHolderVisible =0;
+
   double _sigmaX = 0.8; // from 0-10
   double _sigmaY = 0.6; // from 0-10
   double _opacity = 0.6; // from 0-1.0
   double statusBarHeight;
+  double bodyTranslateX = -10.0;
 
-  String _currentHeadImagePlaceHolder="assets/vct/head.png";
+  String _currentHeadImagePlaceHolder = "assets/vct/head.png";
 
   String torso = "assets/vct/body.png";
 
@@ -80,10 +88,139 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
     audioCachePart = new AudioCache(fixedPlayer: advancedPlayerPart);
   }
 
-  Widget _createBlankContaienrs() {
+
+
+  Widget _roboparts() {
     return Container(
-      height: MediaQuery.of(context).size.height / 6,
-      width: MediaQuery.of(context).size.height / 6,
+      margin: EdgeInsets.all(9.0),
+      padding: EdgeInsets.all(8.0),
+      height: 90.0,
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: assets.length,
+          itemBuilder: (context, i) {
+            return Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: ButtonTheme(
+                minWidth: 30,
+                height: 30.0,
+                child: RaisedButton(
+                  onPressed: () {
+                    if (assets[i] == "assets/vct/body.png" ||
+                        assets[i] == "assets/vct/body1.png") {
+                      this.setState(() {
+                        this.torso = assets[i];
+                      });
+                    }
+                  },
+                  shape: BeveledRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.elliptical(21, 21),
+                          bottomRight: Radius.elliptical(21, 21))),
+                  color: Colors.pinkAccent,
+                  child: Draggable(
+                    onDragStarted: () {
+                      if (assets[i] == "assets/vct/head.png" ||
+                          assets[i] == "assets/vct/straightFaceBot.png" || assets[i] == "assets/vct/straightFaceBotWithAntena.png") {
+                        this.setState(() {
+                          _headPlaceHolderVisible = 0.5;
+                          this._currentHeadImagePlaceHolder = assets[i];
+                         
+                        });
+                      } else if (assets[i] == "assets/vct/bottom.png") {
+                        this.setState(() {
+                          _legPlaceHolderVisible = 0.5;
+                        });
+                      } else if(assets[i]=="assets/vct/right.png"){
+                        this.setState(() {
+                          _rightPlaceHolderVisible = 0.5;
+                         });
+                      } else if(assets[i]=="assets/vct/leftHand.png"){
+                        this.setState(() {
+                          _leftPlaceHolderVisible = 0.5;
+                         });
+                      }
+                    },
+                    onDragEnd: (data) {
+                      if (assets[i] == "assets/vct/head.png" ||
+                          assets[i] == "assets/vct/straightFaceBot.png" || assets[i] == "assets/vct/straightFaceBotWithAntena.png") {
+                        this.setState(() {
+                          _headPlaceHolderVisible = 0.0;
+                        });
+                      } else if (assets[i] == "assets/vct/bottom.png") {
+                        this.setState(() {
+                          _legPlaceHolderVisible = 0.0;
+                        });
+                      } else if(assets[i]=="assets/vct/right.png"){
+                        this.setState(() {
+                          _rightPlaceHolderVisible = 0.0;
+                         });
+                      } else if(assets[i]=="assets/vct/leftHand.png"){
+                        this.setState(() {
+                          _leftPlaceHolderVisible = 0.0;
+                         });
+                      }
+                    },
+                    onDraggableCanceled: (v, d) {
+                      print("object");
+                      if (assets[i] == "assets/vct/head.png" ||
+                          assets[i] == "assets/vct/straightFaceBot.png" || assets[i] == "assets/vct/straightFaceBotWithAntena.png") {
+                        this.setState(() {
+                          _headPlaceHolderVisible = 0.0;
+                        });
+                      } else if (assets[i] == "assets/vct/bottom.png") {
+                        this.setState(() {
+                          _legPlaceHolderVisible = 0.0;
+                        });
+                      } else if(assets[i]=="assets/vct/right.png"){
+                        this.setState(() {
+                          _rightPlaceHolderVisible = 0.0;
+                         });
+                      } else if(assets[i]=="assets/vct/leftHand.png"){
+                        this.setState(() {
+                          _leftPlaceHolderVisible = 0.0;
+                         });
+                      }
+                    },
+                    onDragCompleted: () {
+                      audioCachePart.play("partfix.mp3", volume: 1.0);
+                      if (assets[i] == "assets/vct/head.png") {
+                        this.setState(() {
+                          _headPlaceHolderVisible = 0.0;
+                          
+                        });
+                      } else if (assets[i] == "assets/vct/bottom.png") {
+                        this.setState(() {
+                          _legPlaceHolderVisible = 0.0;
+                        });
+                      } else if(assets[i]=="assets/vct/right.png"){
+                        this.setState(() {
+                          _rightPlaceHolderVisible = 0.0;
+                         });
+                      } else if(assets[i]=="assets/vct/leftHand.png"){
+                        this.setState(() {
+                          _leftPlaceHolderVisible = 0.0;
+                         });
+                      }
+                    },
+                    data: assets[i],
+                    childWhenDragging: Image(
+                      height: 50,
+                      image: AssetImage(assets[i]),
+                    ),
+                    feedback: Image(
+                      height: 90,
+                      image: AssetImage(assets[i]),
+                    ),
+                    child: Image(
+                      height: 50,
+                      image: AssetImage(assets[i]),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          }),
     );
   }
 
@@ -109,31 +246,129 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
   }
 
   Widget _createHead() {
-    return Transform.translate(
-      offset: Offset(9, 15),
+    return Align(
+      alignment: Alignment.center,
       child: DragTarget(
         builder: (context, List<String> candidateData, rejectedData) {
           print(candidateData);
           return acceptHead
-              ? Image(
-                  height: MediaQuery.of(context).size.height / 6,
-                  width: MediaQuery.of(context).size.height / 6,
-                  image: AssetImage(_currentHeadImagePlaceHolder),
-                )
-              : Opacity(
-                  opacity: _headPlaceHolderVisible,
+              ? Container(
+               
+                
+                  width: MediaQuery.of(context).size.width / 3,
                   child: Image(
-                    height: MediaQuery.of(context).size.height / 6,
-                    width: MediaQuery.of(context).size.height / 6,
                     image: AssetImage(_currentHeadImagePlaceHolder),
+                  ),
+                )
+              : Container(
+                
+                 
+                  width: MediaQuery.of(context).size.width / 3,
+                  child: Opacity(
+                    opacity: _headPlaceHolderVisible,
+                    child: Image(
+                      image: AssetImage(_currentHeadImagePlaceHolder),
+                    ),
                   ),
                 );
         },
         onAccept: (data) {
           print(data);
-          if (data == "assets/vct/head.png") {
+          if (data == "assets/vct/head.png" ||
+              data == "assets/vct/straightFaceBot.png" || data == "assets/vct/straightFaceBotWithAntena.png" ) {
             this.setState(() {
               acceptHead = true;
+              _currentHeadImagePlaceHolder = data;
+            });
+            return true;
+          } else {
+            return false;
+          }
+        },
+        onWillAccept: (data) {
+          return true;
+        },
+      ),
+    );
+  }
+  Widget _createLefttHand() {
+    return Align(
+      alignment: Alignment.center,
+          child: DragTarget(
+        builder: (context, List<String> candidateData, rejectedData) {
+          print(candidateData);
+          return acceptLeftHand
+              ? Container(
+               
+                  width: MediaQuery.of(context).size.width / 3,
+                child: Image(
+                    
+                    image: AssetImage("assets/vct/leftHand.png"),
+                  ),
+              )
+              : Opacity(
+                  opacity: _leftPlaceHolderVisible,
+                  child: Container(
+                   
+                  width: MediaQuery.of(context).size.width / 3,
+                    child: Image(
+                      
+                      image: AssetImage("assets/vct/leftHand.png"),
+                    ),
+                  ),
+                );
+        },
+        onAccept: (data) {
+          print(data);
+          if (data == "assets/vct/leftHand.png") {
+            this.setState(() {
+              acceptLeftHand = true;
+            });
+            return true;
+          } else {
+            return false;
+          }
+        },
+        onWillAccept: (data) {
+          return true;
+        },
+      ),
+    );
+  }
+
+  Widget _createRightHand() {
+    return Align(
+      alignment: Alignment.center,
+          child: DragTarget(
+        builder: (context, List<String> candidateData, rejectedData) {
+          print(candidateData);
+          return acceptRightHand
+              ? Container(
+                
+               
+                  width: MediaQuery.of(context).size.width / 3,
+                child: Image(
+                    
+                    image: AssetImage("assets/vct/right.png"),
+                  ),
+              )
+              : Opacity(
+                  opacity: _rightPlaceHolderVisible,
+                  child: Container(
+                   
+                  width: MediaQuery.of(context).size.width / 3,
+                    child: Image(
+                      
+                      image: AssetImage("assets/vct/right.png"),
+                    ),
+                  ),
+                );
+        },
+        onAccept: (data) {
+          print(data);
+          if (data == "assets/vct/right.png") {
+            this.setState(() {
+              acceptRightHand = true;
             });
             return true;
           } else {
@@ -148,25 +383,31 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
   }
 
   Widget _createLegs() {
-    return Transform.translate(
-      offset: Offset(6, -6),
-      child: DragTarget(
+    return Align(
+        alignment: Alignment.center,
+          child: DragTarget(
         builder: (context, List<String> candidateData, rejectedData) {
           print(candidateData);
           return acceptLegs
-              ? Image(
-                  height: MediaQuery.of(context).size.height / 6,
-                  width: MediaQuery.of(context).size.height / 6,
-                  image: AssetImage("assets/vct/bottom.png"),
-                )
-              : Opacity(
-                  opacity: _legPlaceHolderVisible,
-                  child: Image(
-                    height: MediaQuery.of(context).size.height / 6,
-                    width: MediaQuery.of(context).size.height / 6,
+              ? Container(
+                height: MediaQuery.of(context).size.height / 3,
+                width: MediaQuery.of(context).size.width / 3,
+                child: Image(
                     image: AssetImage("assets/vct/bottom.png"),
                   ),
-                );
+              )
+              : Container(
+                height: MediaQuery.of(context).size.height / 3,
+                width: MediaQuery.of(context).size.width / 3,
+                child: Opacity(
+                  
+                    opacity: _legPlaceHolderVisible,
+                    child: Image(
+                      
+                      image: AssetImage("assets/vct/bottom.png"),
+                    ),
+                  ),
+              );
         },
         onAccept: (data) {
           print(data);
@@ -186,212 +427,103 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
     );
   }
 
+  Widget _backDropFileter() {
+    return BackdropFilter(
+      filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+      child: Container(
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.pinkAccent[700], width: 2.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.transparent,
+                blurRadius: 8.0,
+                spreadRadius: 0.0,
+              ),
+            ]),
+      ),
+    );
+  }
+
+  Widget _createTorso() {
+    return Align(
+      alignment: Alignment.center,
+      child: Container(
+          height: MediaQuery.of(context).size.height / 3,
+          width: MediaQuery.of(context).size.width / 3,
+          child: Image(
+            image: AssetImage(torso),
+          )),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     statusBarHeight = MediaQuery.of(context).padding.top;
     return Scaffold(
-        body: Stack(
-      children: <Widget>[
-        Center(
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    fit: BoxFit.cover, image: AssetImage("assets/vct/bg.jpg"))),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-              child: Container(
-                decoration: BoxDecoration(
-                    border:
-                        Border.all(color: Colors.pinkAccent[700], width: 2.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.transparent,
-                        blurRadius: 8.0,
-                        spreadRadius: 0.0,
-                      ),
-                    ]),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Spacer(),
-
-                    /// First Row of Matrix
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        _createBlankContaienrs(),
-                        _createHead(),
-                        _createBlankContaienrs(),
-                      ],
-                    ),
-
-                    /// Second Row of Matrix
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        _createBlankContaienrs(),
-                        Container(
-                          height: MediaQuery.of(context).size.height / 6,
-                          child: Image(
-                            height: MediaQuery.of(context).size.height / 6,
-                            width: MediaQuery.of(context).size.height / 6,
-                            image: AssetImage(torso),
-                          ),
-                        ),
-                        _createBlankContaienrs(),
-                      ],
-                    ),
-                    Row(
-                      children: <Widget>[
-                        _createBlankContaienrs(),
-                        _createLegs(),
-                        _createBlankContaienrs(),
-                      ],
-                    ),
-
-                    Spacer(),
-                    Container(
-                      margin: EdgeInsets.all(9.0),
-                      height: 70.0,
-                      child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: assets.length,
-                          itemBuilder: (context, i) {
-                            return Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      color: Colors.pinkAccent[700],
-                                      width: 2.0),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.pinkAccent[700],
-                                      blurRadius: 8.0,
-                                      spreadRadius: 2.0,
-                                    ),
-                                  ]),
-                              margin: EdgeInsets.only(left: 10.0),
-                              child: Padding(
-                                padding: const EdgeInsets.all(1.0),
-                                child: Material(
-                                  shape: BeveledRectangleBorder(
-                                      borderRadius: BorderRadius.only(
-                                          bottomLeft:
-                                              Radius.elliptical(12, 9))),
-                                  color: Colors.transparent,
-                                  child: InkWell(
-                                    onTap: () {
-                                      if (assets[i] == "assets/vct/body.png" ||
-                                          assets[i] == "assets/vct/body1.png") {
-                                        this.setState(() {
-                                          this.torso = assets[i];
-                                        });
-                                      }
-                                    },
-                                    child: Draggable(
-                                      onDragStarted: () {
-                                        if (assets[i] ==
-                                            "assets/vct/head.png") {
-                                          this.setState(() {
-                                            _headPlaceHolderVisible = 0.5;
-                                            this._currentHeadImagePlaceHolder = assets[i];
-                                          });
-                                        } else if (assets[i] ==
-                                            "assets/vct/bottom.png") {
-                                          this.setState(() {
-                                            _legPlaceHolderVisible = 0.5;
-                                          });
-                                        }
-                                      },
-                                      onDragEnd: (data) {
-                                        if (assets[i] ==
-                                            "assets/vct/head.png") {
-                                          this.setState(() {
-                                            _headPlaceHolderVisible = 0.0;
-                                          });
-                                        } else if (assets[i] ==
-                                            "assets/vct/bottom.png") {
-                                          this.setState(() {
-                                            _legPlaceHolderVisible = 0.0;
-                                          });
-                                        }
-                                      },
-                                      onDraggableCanceled: (v, d) {
-                                        if (assets[i] ==
-                                            "assets/vct/head.png") {
-                                          this.setState(() {
-                                            _headPlaceHolderVisible = 0.0;
-                                          });
-                                        } else if (assets[i] ==
-                                            "assets/vct/bottom.png") {
-                                          this.setState(() {
-                                            _legPlaceHolderVisible = 0.0;
-                                          });
-                                        }
-                                      },
-                                      onDragCompleted: () {
-                                        audioCachePart.play("partfix.mp3",
-                                            volume: 1.0);
-                                        if (assets[i] ==
-                                            "assets/vct/head.png") {
-                                          this.setState(() {
-                                            _headPlaceHolderVisible = 0.0;
-                                          });
-                                        } else if (assets[i] ==
-                                            "assets/vct/bottom.png") {
-                                          this.setState(() {
-                                            _legPlaceHolderVisible = 0.0;
-                                          });
-                                        }
-                                      },
-                                      data: assets[i],
-                                      childWhenDragging: Image(
-                                        height: 50,
-                                        image: AssetImage(assets[i]),
-                                      ),
-                                      feedback: Image(
-                                        height: 90,
-                                        image: AssetImage(assets[i]),
-                                      ),
-                                      child: Image(
-                                        height: 50,
-                                        image: AssetImage(assets[i]),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            );
-                          }),
-                    )
-                  ],
-                ),
+        body: Container(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              fit: BoxFit.cover, image: AssetImage("assets/vct/bg.jpg"))),
+      child: Stack(
+        children: <Widget>[
+          _backDropFileter(),
+          _createTorso(),
+          Positioned(
+            top: MediaQuery.of(context).size.height / 2.59,
+              bottom: 0,
+              right: 0,
+              left: MediaQuery.of(context).size.width/30 ,
+            child: _createLegs()),
+          Positioned(
+              top: -MediaQuery.of(context).size.height / 3.5,
+              bottom: 0,
+              right: 0,
+              left: 0,
+              child: _createHead()),
+              Positioned(
+                right: 0,
+                bottom: 0,
+                left: MediaQuery.of(context).size.height / 2.75,
+                top: -MediaQuery.of(context).size.height / 14,
+                child: _createLefttHand()),
+              Positioned(
+                right: 0,
+                bottom: 0,
+                left: -MediaQuery.of(context).size.width / 10,
+                top: MediaQuery.of(context).size.height / 7,
+                child: _createRightHand()),
+          Positioned(bottom: 1.0, left: 0.0, right: 0.0, child: _roboparts()),
+          Positioned(
+            top: 20.0,
+            left: 10,
+            child: RaisedButton(
+              elevation: 4,
+              color: Colors.pinkAccent,
+              shape: BeveledRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.elliptical(12, 9),
+                      bottomRight: Radius.elliptical(12, 9))),
+              onPressed: () {},
+              child: Text(
+                "Jarvish Hack",
+                style: TextStyle(color: Colors.white),
               ),
             ),
           ),
-        ),
-        Positioned(
-          top: 20.0,
-          left: 10,
-          child: RaisedButton(
-            elevation: 4,
-            color: Colors.pinkAccent,
-            shape: BeveledRectangleBorder(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.elliptical(12, 9),
-                    bottomRight: Radius.elliptical(12, 9))),
-            onPressed: () {},
-            child: Text(
-              "Jarvish Hack",
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
-        Positioned(top: 20.0, right: 10, child: _stopSong()),
-      ],
+          Positioned(top: 20.0, right: 10, child: _stopSong()),
+        ],
+      ),
     ));
   }
+
+@override
+void dispose(){
+  super.dispose();
+  audioCache.clear("cyberpunk.mp3");
 }
+
+}
+
+
