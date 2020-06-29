@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Retro',
         theme: ThemeSelection.getLightTheme(ThemeSelection.NeonCity),
         home: SplashScreen(),

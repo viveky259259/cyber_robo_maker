@@ -27,7 +27,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: isInitializing
           ? Center(
               child: Column(
@@ -37,15 +36,15 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   SizedBox(
                     height: 32,
                   ),
-                  Text('Initializing..',
-                      style: CustomTextStyle.strokeStyle()),
+                  Text('Initializing..', style: CustomTextStyle.strokeStyle()),
                 ],
               ),
             )
           : SizedBox(
               height: double.infinity,
               width: double.infinity,
-              child: RoboEditorScreen()),
+              child: RoboEditorScreen(),
+            ),
       bottomNavigationBar: isInitializing
           ? null
           : Padding(
@@ -54,7 +53,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 color: ThemeSelection.bgColor2,
                 shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(16),
+                        bottomRight: Radius.circular(16),
                         topLeft: Radius.circular(16)),
                     side: BorderSide(color: ThemeSelection.neonNew)),
                 padding: EdgeInsets.all(16),
