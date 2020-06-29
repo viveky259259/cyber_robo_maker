@@ -106,7 +106,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           : SizedBox(
               height: double.infinity,
               width: double.infinity,
-              child: RoboEditorScreen(screenshotController)),
+              child: RoboEditorScreen(screenshotController)
+          ),
       bottomNavigationBar: isInitializing
           ? null
           : Padding(
@@ -115,7 +116,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 color: ThemeSelection.bgColor2,
                 shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(16),
+                        bottomRight: Radius.circular(16),
                         topLeft: Radius.circular(16)),
                     side: BorderSide(color: ThemeSelection.neonNew)),
                 padding: EdgeInsets.all(16),
