@@ -9,7 +9,14 @@ import 'package:retro_saving_world/common/widgets/custom_icon.dart';
 import 'package:retro_saving_world/common/widgets/neon_progressbar.dart';
 import 'package:retro_saving_world/dashbaord/screen.dart';
 
-class AppSliderScreen extends StatelessWidget {
+class AppSliderScreen extends StatefulWidget {
+  @override
+  _AppSliderScreenState createState() => _AppSliderScreenState();
+}
+
+class _AppSliderScreenState extends State<AppSliderScreen> {
+  var left = 0.0;
+
   Widget makeYourOwnRoboButton() {
     return Padding(
       padding: EdgeInsets.all(8.0),
@@ -75,37 +82,47 @@ class AppSliderScreen extends StatelessWidget {
       body: Container(
         height: height,
         width: width,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-              "assets/vct/bg.jpg",
-            ),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Stack(
-          children: <Widget>[
-            Swiper(
-              itemCount: botCards.length,
-              autoplay: false,
-              loop: false,
-              curve: Curves.bounceIn,
-              itemBuilder: (BuildContext context, int i) => botCards[i],
-              pagination: SwiperPagination(),
-              control: SwiperControl(
-                disableColor: Colors.grey,
-                color: ThemeSelection.neonNew,
+        child: NotificationListener(
+          onNotification: (n) {
+            if (n is ScrollUpdateNotification) {
+              setState(() {
+                left -= n.scrollDelta / 2;
+              });
+              return true;
+            } else
+              return false;
+          },
+          child: Stack(
+            children: <Widget>[
+              new Positioned(
+                left: left,
+                child: new ConstrainedBox(
+                  constraints: new BoxConstraints(maxWidth: MediaQuery.of(context).size.width*4),
+                  child: new Image.asset("assets/vct/bg.jpg"),
+                ),
               ),
-              scrollDirection: Axis.horizontal,
-              physics: BouncingScrollPhysics(),
-            ),
-            Positioned(
-              bottom: 25,
-              left: 10,
-              right: 10,
-              child: makeYourOwnRoboButton(),
-            ),
-          ],
+              Swiper(
+                itemCount: botCards.length,
+                autoplay: false,
+                loop: false,
+                curve: Curves.bounceIn,
+                itemBuilder: (BuildContext context, int i) => botCards[i],
+                pagination: SwiperPagination(),
+                control: SwiperControl(
+                  disableColor: Colors.grey,
+                  color: ThemeSelection.neonNew,
+                ),
+                scrollDirection: Axis.horizontal,
+                physics: BouncingScrollPhysics(),
+              ),
+              Positioned(
+                bottom: 25,
+                left: 10,
+                right: 10,
+                child: makeYourOwnRoboButton(),
+              ),
+            ],
+          ),
         ),
       ),
     );
