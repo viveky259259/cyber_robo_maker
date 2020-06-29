@@ -7,16 +7,19 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
+  build-and-test:
     runs-on: ubuntu-latest
-
-    container:
-      image:  google/dart:latest
-
     steps:
-    - uses: actions/checkout@v2
-    - name: Install dependencies
-      run: pub get
-    - name: Run tests
-      run: pub run test
+      - uses: actions/checkout@v1
+      # The flutter action needs java so include it
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      # Include the flutter action
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'stable'
+      # Get flutter packages
+      - run: flutter pub get
+      # Build :D
+      - run: flutter build aot -t lib/main.dart
