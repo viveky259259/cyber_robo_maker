@@ -21,7 +21,7 @@ class AppSliderScreen extends StatelessWidget {
             side: BorderSide(color: ThemeSelection.neonNew)),
         padding: EdgeInsets.all(16),
         onPressed: () {
-          Get.off(DashBoardScreen());
+          Get.to(DashBoardScreen());
         },
         child: Text(
           'Make your retro',
@@ -92,12 +92,7 @@ class AppSliderScreen extends StatelessWidget {
         ),
         child: Stack(
           children: <Widget>[
-            Positioned(
-              bottom: 25,
-              left: 10,
-              right: 10,
-              child: makeYourOwnRoboButton(),
-            ),
+
             Swiper(
               itemCount: botCards.length,
               autoplay: false,
@@ -111,6 +106,12 @@ class AppSliderScreen extends StatelessWidget {
               ),
               scrollDirection: Axis.horizontal,
               physics: BouncingScrollPhysics(),
+            ),
+            Positioned(
+              bottom: 25,
+              left: 10,
+              right: 10,
+              child: makeYourOwnRoboButton(),
             ),
           ],
         ),
