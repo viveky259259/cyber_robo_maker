@@ -52,9 +52,9 @@ class _NeonProgressBarState extends State<NeonProgressBar>
         ),
       ]),
       child: LinearProgressIndicator(
-        backgroundColor: Colors.purpleAccent,
+        backgroundColor: Colors.purple,
         valueColor: AlwaysStoppedAnimation<Color>(
-          Colors.purple,
+          Colors.purpleAccent,
         ),
         value: animation.value,
       ),

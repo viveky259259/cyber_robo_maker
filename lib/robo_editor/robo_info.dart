@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:retro_saving_world/common/widgets/special_power.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:retro_saving_world/common/widgets/neon_progressbar.dart';
 
 class RobotInfo extends StatefulWidget {
@@ -26,90 +28,63 @@ class _RobotInfoState extends State<RobotInfo> {
               widget.image,
               width: double.infinity,
               height: MediaQuery.of(context).size.height / 2,
-              fit: BoxFit.cover,
+              fit: BoxFit.fitWidth,
             ),
             Container(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: 50,
+                    height: 10,
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Robot Name: ",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      Text(
-                        "Jarvish Hack",
-                        style: TextStyle(color: Colors.white),
+                        "Chester",
+                        style: TextStyle(color: Colors.white, fontSize: 40.0),
                       )
                     ],
                   ),
                   SizedBox(
                     height: 16,
                   ),
-                  Text("Power 1:", style: TextStyle(color: Colors.white)),
+                  Text("Power 1:",
+                      style: TextStyle(color: Colors.white, fontSize: 20.0)),
                   NeonProgressBar(0.6),
-                  Text("Power 2:", style: TextStyle(color: Colors.white)),
+                  Text("Power 2:",
+                      style: TextStyle(color: Colors.white, fontSize: 20.0)),
                   NeonProgressBar(0.4),
-                  Text("Power 3:", style: TextStyle(color: Colors.white)),
+                  Text("Power 3:",
+                      style: TextStyle(color: Colors.white, fontSize: 20.0)),
                   NeonProgressBar(0.9),
-                  Text("Special Powers", style: TextStyle(color: Colors.white)),
-                  Wrap(
-                    runSpacing: 8,
-                    spacing: 16,
-                    children: [
-                      Chip(
-                        avatar: CircleAvatar(
-                          backgroundColor: Colors.purple.shade800,
-                          child: Icon(
-                            Icons.ac_unit,
-                            color: Colors.white,
-                          ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text("Special Powers",
+                      style: TextStyle(color: Colors.white, fontSize: 20.0)),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        SpecialPower(
+                          powerName: 'Wind Blast',
+                          icon: FontAwesomeIcons.wind,
                         ),
-                        backgroundColor: Colors.purpleAccent[400],
-                        label: Text('Wind Blast',
-                            style: TextStyle(color: Colors.white)),
-                      ),
-                      Chip(
-                        avatar: CircleAvatar(
-                          backgroundColor: Colors.purple.shade800,
-                          child: Icon(
-                            Icons.ac_unit,
-                            color: Colors.white,
-                          ),
+                        SpecialPower(
+                          powerName: 'Cannon Blast',
+                          icon: FontAwesomeIcons.certificate,
                         ),
-                        backgroundColor: Colors.purpleAccent[400],
-                        label: Text('Wind Blast',
-                            style: TextStyle(color: Colors.white)),
-                      ),
-                      Chip(
-                        avatar: CircleAvatar(
-                          backgroundColor: Colors.purple.shade800,
-                          child: Icon(
-                            Icons.ac_unit,
-                            color: Colors.white,
-                          ),
+                        SpecialPower(
+                          powerName: 'Cosmic Punch',
+                          icon: FontAwesomeIcons.handRock,
                         ),
-                        backgroundColor: Colors.purpleAccent[400],
-                        label: Text('Wind Blast',
-                            style: TextStyle(color: Colors.white)),
-                      ),
-                      Chip(
-                        avatar: CircleAvatar(
-                          backgroundColor: Colors.purple.shade800,
-                          child: Icon(
-                            Icons.ac_unit,
-                            color: Colors.white,
-                          ),
-                        ),
-                        backgroundColor: Colors.purpleAccent[400],
-                        label: Text('Wind Blast',
-                            style: TextStyle(color: Colors.white)),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),
