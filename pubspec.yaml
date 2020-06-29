@@ -29,6 +29,8 @@ dependencies:
   screenshot: ^0.2.0
   gallery_saver:
   path_provider:
+  esys_flutter_share: ^1.0.2
+
 
 
 dev_dependencies:

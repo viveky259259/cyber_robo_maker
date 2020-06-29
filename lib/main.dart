@@ -4,6 +4,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
@@ -16,6 +17,8 @@ import 'common/themes.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIOverlays([]);
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(MyApp());
 }
 
@@ -82,10 +85,10 @@ class _MyHomePageState extends State<MyHomePage> {
     try {
       inside = true;
       RenderRepaintBoundary boundary =
-          _globalKey.currentContext.findRenderObject();
+      _globalKey.currentContext.findRenderObject();
       ui.Image image = await boundary.toImage(pixelRatio: 3.0);
       ByteData byteData =
-          await image.toByteData(format: ui.ImageByteFormat.png);
+      await image.toByteData(format: ui.ImageByteFormat.png);
       Uint8List pngBytes = byteData.buffer.asUint8List();
       //      String bs64 = base64Encode(pngBytes);
       //      print(pngBytes);
@@ -96,7 +99,8 @@ class _MyHomePageState extends State<MyHomePage> {
 //      });
       await showDialog(
           context: context,
-          builder: (context) => AlertDialog(
+          builder: (context) =>
+              AlertDialog(
                 content: Container(
                   decoration: BoxDecoration(
                       image: DecorationImage(image: MemoryImage(pngBytes))),

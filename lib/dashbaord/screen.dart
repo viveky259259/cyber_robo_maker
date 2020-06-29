@@ -5,10 +5,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:gallery_saver/gallery_saver.dart';
+import 'package:get/get.dart';
 import 'package:retro_saving_world/common/text_styles.dart';
 import 'package:retro_saving_world/common/themes.dart';
 import 'package:retro_saving_world/robo_editor/robo_editor.dart';
+import 'package:retro_saving_world/robo_editor/robo_stat.dart';
 import 'package:screenshot/screenshot.dart';
 
 class DashBoardScreen extends StatefulWidget {
@@ -18,14 +19,12 @@ class DashBoardScreen extends StatefulWidget {
 
 class _DashBoardScreenState extends State<DashBoardScreen> {
   bool isInitializing;
-  GlobalKey _globalKey;
   Widget roboEditor;
 
   @override
   void initState() {
     super.initState();
     isInitializing = true;
-    _globalKey = new GlobalKey();
     Future.delayed(Duration(seconds: 2)).then((value) {
       setState(() {
         isInitializing = false;
@@ -121,43 +120,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     side: BorderSide(color: ThemeSelection.neonNew)),
                 padding: EdgeInsets.all(16),
                 onPressed: () async {
-//                    Get.to(RoboStats());
-//                  createImageFromWidget(roboEditor);
-                  image = await screenshotController.capture();
-
-                  GallerySaver.saveImage(image.path);
-                  //TODO:: Pass image preview / card screen  || Abhishek and Praful
-                  showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                            backgroundColor:
-                                Theme.of(context).scaffoldBackgroundColor,
-                            title: Text(
-                              'New Robo',
-                              style: CustomTextStyle.strokeStyle(),
-                            ),
-                            content: Stack(
-                              fit: StackFit.expand,
-                              children: <Widget>[
-                                BackdropFilter(
-                                  filter: ImageFilter.blur(
-                                      sigmaX: 10.0, sigmaY: 10.0),
-                                  child: Container(
-                                    height: 400,
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.transparent,
-                                        blurRadius: 8.0,
-                                        spreadRadius: 0.0,
-                                      ),
-                                    ]),
-                                  ),
-                                ),
-                                Image.file(image),
-                              ],
-                            ),
-                          ));
+                  image = await screenshotController.capture(pixelRatio: 4);
+                  Get.to(RoboStats(image));
                   setState(() {});
                 },
                 child: Text(
