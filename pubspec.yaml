@@ -1,6 +1,6 @@
 name: retro_saving_world
 description: A hackathon Project
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
@@ -13,12 +13,9 @@ dependencies:
   cupertino_icons: ^0.1.3
   responsive_framework: ^0.0.7
   cached_network_image: ^2.2.0+1
-  http: 0.12.0+4
-  bloc: ^4.0.0
-  flutter_bloc: ^4.0.1
-  equatable:
+
   get:
-  country_code_picker: ^1.4.0
+
   font_awesome_flutter: 8.5.0
   intl:
   lottie: ^0.4.0+1
@@ -28,7 +25,9 @@ dependencies:
   audioplayers: ^0.15.1
   screenshot: ^0.2.0
   gallery_saver:
-  path_provider:
+
+  esys_flutter_share: ^1.0.2
+
 
 
 dev_dependencies:
@@ -40,7 +39,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -97,9 +95,6 @@ flutter:
       fonts:
         - asset: assets/font/neoncity.otf
         - asset: assets/font/neonlights.ttf
-
-
-
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

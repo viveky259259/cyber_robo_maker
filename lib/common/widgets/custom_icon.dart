@@ -7,7 +7,7 @@ class CustomIcon extends StatelessWidget {
   final Color color;
 
   CustomIcon(this.iconData,
-      {this.size = 24, this.color = ThemeSelection.neonPurple});
+      {this.size = 24, this.color = ThemeSelection.blueNeonDark});
 
   Widget build(BuildContext context) {
     return Icon(
