@@ -217,7 +217,8 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
                 topLeft: Radius.elliptical(12, 9),
                 bottomRight: Radius.elliptical(12, 9))),
         onPressed: () {
-          advancedPlayer.stop();
+          advancedPlayerPart.pause();
+          advancedPlayer.pause();
         },
       ),
     );
@@ -485,7 +486,7 @@ class _RetroState extends State<Retro> with TickerProviderStateMixin {
                           bottomRight: Radius.elliptical(12, 9))),
                   onPressed: () {},
                   child: Text(
-                    "Jarvish Hack",
+                    "Jarvis Hack",
                     style: TextStyle(color: Colors.white),
                   ),
                 ),

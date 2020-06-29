@@ -133,8 +133,8 @@ class AppSliderScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    Color(0xff77A1D3),
-                    ThemeSelection.neonPurple,
+                    Colors.indigoAccent[700],
+                    Color.fromRGBO(8, 8,109, 1),
                   ],
                   begin: Alignment.bottomLeft,
                   end: Alignment.topRight,
