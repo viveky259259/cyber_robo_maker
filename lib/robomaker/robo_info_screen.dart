@@ -5,11 +5,9 @@ import 'package:get/get.dart';
 import 'package:retro_saving_world/common/text_styles.dart';
 import 'package:retro_saving_world/common/themes.dart';
 import 'package:retro_saving_world/common/widgets/custom_icon.dart';
-import 'package:retro_saving_world/common/widgets/neon_progressbar.dart';
 import 'package:retro_saving_world/common/widgets/robo_spec_widget.dart';
 import 'package:retro_saving_world/common/widgets/special_power.dart';
 import 'package:retro_saving_world/robo_editor/robo_output.dart';
-import 'package:retro_saving_world/robo_editor/robo_stat.dart';
 
 class RobotInfo extends StatefulWidget {
   @override
@@ -29,7 +27,18 @@ class _RobotInfoState extends State<RobotInfo> {
                 width: 200,
                 height: 200,
               ),
-
+              Container(
+                padding: EdgeInsets.only(top: 20),
+                child: Center(
+                  child: Text(
+                    "Jarvish Hack",
+                    style: TextStyle(
+                        fontFamily: ThemeSelection.BigSpace,
+                        fontSize: 40.0,
+                        color: Colors.white),
+                  ),
+                ),
+              ),
               RoboSpecWidget(
                 specName: "Power 1",
                 value: 0.8,
