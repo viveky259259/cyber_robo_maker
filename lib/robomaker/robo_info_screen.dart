@@ -31,7 +31,7 @@ class _RobotInfoState extends State<RobotInfo> {
                 padding: EdgeInsets.only(top: 20),
                 child: Center(
                   child: Text(
-                    "Jarvish Hack",
+                    "Jarvis Hack",
                     style: TextStyle(
                         fontFamily: ThemeSelection.BigSpace,
                         fontSize: 40.0,

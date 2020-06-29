@@ -3,8 +3,10 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'dart:ui';
 
+import 'package:retro_saving_world/common/widgets/custom_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:retro_saving_world/common/text_styles.dart';
 import 'package:retro_saving_world/common/themes.dart';
@@ -125,12 +127,20 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   Get.to(RoboStats(image));
                   setState(() {});
                 },
-                child: Text(
-                  'Generate',
-                  style: CustomTextStyle.glowStyle(),
-                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomIcon(FontAwesomeIcons.screwdriver, size: 20, color: Colors.white),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'Generate',
+                      style: CustomTextStyle.glowStyle(),
+                    ),
+                  ],
+                ))
               ),
-            ),
     );
   }
 }
