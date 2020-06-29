@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class NeonProgressBar extends StatefulWidget {
   final endValue;
-  const NeonProgressBar (this.endValue);
+
+  const NeonProgressBar(this.endValue);
 
   @override
   _NeonProgressBarState createState() => _NeonProgressBarState();
@@ -38,6 +39,7 @@ class _NeonProgressBarState extends State<NeonProgressBar>
       margin: EdgeInsets.all(20),
       height: 20,
       decoration:
+
           BoxDecoration(borderRadius: BorderRadius.circular(50), boxShadow: [
         BoxShadow(
           color: Colors.pinkAccent[700].withAlpha(100),

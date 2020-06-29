@@ -8,6 +8,8 @@ class ThemeSelection {
   static final String RetroFunk = 'RetroFunk';
   static final String Neon = "Neon";
   static final String NeonCity = "NeonCity";
+  static final String EvilEmpire = "EvilEmpire";
+  static final String BigSpace = "BigSpace";
   static const Color dark = Color(0xFF383838);
   static const Color neonPurple = Color(0xFFbc13fe);
   static const Color neonDarkBlue = Color(0xFF7d12ff);
