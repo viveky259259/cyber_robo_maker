@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
       title: 'Retro',
       theme: ThemeSelection.getLightTheme(ThemeSelection.BigSpace),
       home: SplashScreen(),
+      debugShowCheckedModeBanner: false,
       navigatorKey: Get.key,
       builder: (context, child) {
         return ResponsiveWrapper(
