@@ -18,7 +18,7 @@ We as flutter developers wanted to try out that can flutter create a robot with 
 
 ## Youtube Video
 
-[![Youtube Video]<iframe width="560" height="315" src="https://www.youtube.com/embed/HMdeaeDDA-U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![Youtube Video](https://img.youtube.com/vi/HMdeaeDDA-U/0.jpg)](https://www.youtube.com/watch?v=HMdeaeDDA-U)
 
 ## ScreenShots
 <p float="left">
