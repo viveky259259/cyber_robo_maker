@@ -5,6 +5,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:retro_saving_world/common/text_styles.dart';
 import 'package:screenshot/screenshot.dart';
 
 class RoboEditorScreen extends StatefulWidget {
@@ -42,7 +43,7 @@ class _RoboEditorScreenState extends State<RoboEditorScreen> {
                     radius: 64.0,
                     lineWidth: 5.0,
                     percent: value * 0.01,
-                    center: Text('$value'),
+                    center: Text('$value',style: CustomTextStyle.glowStyle(fontSize: 20.0),),
                     circularStrokeCap: CircularStrokeCap.square,
                     backgroundColor: Color(0xff1261d1),
                     maskFilter: MaskFilter.blur(BlurStyle.solid, 2),
