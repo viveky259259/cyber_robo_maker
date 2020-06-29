@@ -33,16 +33,17 @@ class _RoboStatsState extends State<RoboStats> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(
-          children: <Widget>[
-            Screenshot(
-              controller: controller,
-              child: Stack(
-      fit: StackFit.expand,
-      children: [
+      children: <Widget>[
+        Screenshot(
+          controller: controller,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
               Container(
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        fit: BoxFit.cover, image: AssetImage("assets/vct/bg.jpg"))),
+                        fit: BoxFit.cover,
+                        image: AssetImage("assets/vct/bg.jpg"))),
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                   child: Container(
@@ -58,42 +59,50 @@ class _RoboStatsState extends State<RoboStats> {
                   ),
                 ),
               ),
+              Opacity(
+                opacity: 0.2,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    "assets/carbg.png",
+                  ),
+                ),
+              ),
               SizedBox(
                   height: double.infinity,
                   width: double.infinity,
                   child: RobotInfo(widget.image)),
-
-      ],
-    ),
-            ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: EdgeInsets.only(right: 16),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    CircleAvatar(
-                      child: IconButton(
-                        onPressed: () async {
-                          File shareImage = await controller.capture(pixelRatio: 4);
-                          GallerySaver.saveImage(shareImage.path,
-                              albumName: 'My Robots');
-                          final Uint8List bytes =
+            ],
+          ),
+        ),
+        Align(
+          alignment: Alignment.centerRight,
+          child: Padding(
+            padding: EdgeInsets.only(right: 16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                CircleAvatar(
+                  child: IconButton(
+                    onPressed: () async {
+                      File shareImage = await controller.capture(pixelRatio: 4);
+                      GallerySaver.saveImage(shareImage.path,
+                          albumName: 'My Robots');
+                      final Uint8List bytes =
                           await shareImage.readAsBytesSync();
-                          await Share.file('My Robo', 'robo.png',
-                              bytes.buffer.asUint8List(), 'image/png',
-                              text:
+                      await Share.file('My Robo', 'robo.png',
+                          bytes.buffer.asUint8List(), 'image/png',
+                          text:
                               'Hi, Look at the amazing robo made by mw using Retro Robo Maker');
-                        },
-                        icon: CustomIcon(FontAwesomeIcons.whatsapp),
-                      ),
-                    )
-                  ],
-                ),
-              ),
+                    },
+                    icon: CustomIcon(FontAwesomeIcons.whatsapp),
+                  ),
+                )
+              ],
             ),
-          ],
-        ));
+          ),
+        ),
+      ],
+    ));
   }
 }
