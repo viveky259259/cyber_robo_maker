@@ -29,18 +29,7 @@ class _RobotInfoState extends State<RobotInfo> {
                 width: 200,
                 height: 200,
               ),
-              Container(
-                padding: EdgeInsets.only(top: 20),
-                child: Center(
-                  child: Text(
-                    "Jarvish Hack",
-                    style: TextStyle(
-                        fontFamily: ThemeSelection.BigSpace,
-                        fontSize: 40.0,
-                        color: Colors.white),
-                  ),
-                ),
-              ),
+
               RoboSpecWidget(
                 specName: "Power 1",
                 value: 0.8,

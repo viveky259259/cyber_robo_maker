@@ -32,18 +32,6 @@ class _RobotInfoState extends State<RobotInfo> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Text(
-                        "Robot Name: ",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      Text(
-                        "Jarvish Hack",
-                        style: TextStyle(color: Colors.white),
-                      )
-                    ],
-                  ),
                   SizedBox(
                     height: 50,
                   ),
