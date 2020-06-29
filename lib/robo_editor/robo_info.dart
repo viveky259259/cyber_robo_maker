@@ -35,6 +35,21 @@ class _RobotInfoState extends State<RobotInfo> {
                   SizedBox(
                     height: 50,
                   ),
+                  Row(
+                    children: [
+                      Text(
+                        "Robot Name: ",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      Text(
+                        "Jarvish Hack",
+                        style: TextStyle(color: Colors.white),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
                   Text("Power 1:", style: TextStyle(color: Colors.white)),
                   NeonProgressBar(0.6),
                   Text("Power 2:", style: TextStyle(color: Colors.white)),
@@ -43,7 +58,7 @@ class _RobotInfoState extends State<RobotInfo> {
                   NeonProgressBar(0.9),
                   Text("Special Powers", style: TextStyle(color: Colors.white)),
                   Wrap(
-                    runSpacing: 16,
+                    runSpacing: 8,
                     spacing: 16,
                     children: [
                       Chip(

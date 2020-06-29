@@ -1,13 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:retro_saving_world/app_slider/sliderTemplate.dart';
 import 'package:retro_saving_world/common/text_styles.dart';
 import 'package:retro_saving_world/common/themes.dart';
+import 'package:retro_saving_world/common/widgets/custom_icon.dart';
 import 'package:retro_saving_world/common/widgets/neon_progressbar.dart';
 import 'package:retro_saving_world/dashbaord/screen.dart';
-import 'package:retro_saving_world/robo_editor/robo_stat.dart';
 
 class AppSliderScreen extends StatelessWidget {
   Widget makeYourOwnRoboButton() {
@@ -21,30 +21,23 @@ class AppSliderScreen extends StatelessWidget {
             side: BorderSide(color: ThemeSelection.neonNew)),
         padding: EdgeInsets.all(16),
         onPressed: () {
-          Get.off(DashBoardScreen());
+          Get.to(DashBoardScreen());
         },
-        child: Text(
-          'Make your retro',
-          style: CustomTextStyle.glowStyle(),
+        child: Row(
+          children: <Widget>[
+            CustomIcon(FontAwesomeIcons.robot,
+                size: 24, color: Colors.blue[200]),
+            SizedBox(
+              width: 20,
+            ),
+            Text(
+              'Make your own Robo',
+              style: CustomTextStyle.strokeStyle(),
+            ),
+          ],
         ),
       ),
     );
-    // return OutlineButton(
-    //   borderSide: BorderSide(color: ThemeSelection.borderColor, width: 5),
-    //   shape: RoundedRectangleBorder(
-    //     side: BorderSide(
-    //       color: ThemeSelection.neonNew,
-    //     ),
-    //   ),
-    //   padding: EdgeInsets.all(32),
-    //   onPressed: () {
-    //     Get.off(DashBoardScreen());
-    //   },
-    //   child: Text(
-    //     'Make your own Robo',
-    //     style: CustomTextStyle.strokeStyle(),
-    //   ),
-    // );
   }
 
   @override
@@ -92,12 +85,6 @@ class AppSliderScreen extends StatelessWidget {
         ),
         child: Stack(
           children: <Widget>[
-            Positioned(
-              bottom: 25,
-              left: 10,
-              right: 10,
-              child: makeYourOwnRoboButton(),
-            ),
             Swiper(
               itemCount: botCards.length,
               autoplay: false,
@@ -111,6 +98,12 @@ class AppSliderScreen extends StatelessWidget {
               ),
               scrollDirection: Axis.horizontal,
               physics: BouncingScrollPhysics(),
+            ),
+            Positioned(
+              bottom: 25,
+              left: 10,
+              right: 10,
+              child: makeYourOwnRoboButton(),
             ),
           ],
         ),
@@ -141,7 +134,7 @@ class AppSliderScreen extends StatelessWidget {
                 gradient: LinearGradient(
                   colors: [
                     Color(0xff77A1D3),
-                    Color(0xff79CBCA),
+                    ThemeSelection.neonPurple,
                   ],
                   begin: Alignment.bottomLeft,
                   end: Alignment.topRight,
@@ -165,7 +158,7 @@ class AppSliderScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                   softWrap: true,
                   text: TextSpan(
-                      style: CustomTextStyle.glowStyle(fontSize: 14.0),
+                      style: CustomTextStyle.glowStyle(fontSize: 16.0),
                       text: "Hi There! I'm\n",
                       children: [TextSpan(text: botName)])),
               Spacer(),
@@ -193,14 +186,6 @@ class AppSliderScreen extends StatelessWidget {
             ),
           ),
         ),
-        // Positioned(
-        //   right: 50,
-        //   top: 10,
-        //   child: Text(
-        //     "Cheater",
-        //     style: TextStyle(color: Colors.black),
-        //   ),
-        // )
       ],
     );
   }
